@@ -1,0 +1,72 @@
+[
+  {
+    "id": "pikachu",
+    "name": "皮卡丘",
+    "latin": "Pikachu",
+    "type": "电",
+    "line": "草甸上的黄毛小兽，颊侧腺体能放出短促电弧，用来逼退猛禽。"
+  },
+  {
+    "id": "charizard",
+    "name": "喷火龙",
+    "latin": "Charizard",
+    "type": "火 / 飞行",
+    "line": "熔岩崖上筑巢的巨翼爬行动物，尾焰来自腹中积存的可燃气。"
+  },
+  {
+    "id": "bulbasaur",
+    "name": "妙蛙种子",
+    "latin": "Bulbasaur",
+    "type": "草 / 毒",
+    "line": "矮壮的绿斑爬行动物，背上长着一枚整天闭合的绿苞。"
+  },
+  {
+    "id": "squirtle",
+    "name": "杰尼龟",
+    "latin": "Squirtle",
+    "type": "水",
+    "line": "溪石上的蓝皮小龟，褐色硬壳挡水，卷尾用来稳住身子。"
+  },
+  {
+    "id": "eevee",
+    "name": "伊布",
+    "latin": "Eevee",
+    "type": "一般",
+    "line": "落叶林里的褐毛小兽，颈上一圈奶油色鬃毛，尾尖发白。"
+  },
+  {
+    "id": "snorlax",
+    "name": "卡比兽",
+    "latin": "Snorlax",
+    "type": "一般",
+    "line": "草甸上的巨兽整天仰卧，醒来几乎只为把肚子填满。"
+  },
+  {
+    "id": "gengar",
+    "name": "耿鬼",
+    "latin": "Gengar",
+    "type": "幽灵 / 毒",
+    "line": "夜雾里的短肢紫黑动物，宽嘴咧到耳根，周围气温会下降。"
+  },
+  {
+    "id": "mewtwo",
+    "name": "超梦",
+    "latin": "Mewtwo",
+    "type": "超能力",
+    "line": "云海上的山脊偶能见到它，淡紫双足，独自站在风口。"
+  },
+  {
+    "id": "jigglypuff",
+    "name": "胖丁",
+    "latin": "Jigglypuff",
+    "type": "一般",
+    "line": "花丛里的圆滚粉毛小兽，喉囊鼓起时，低沉声波会让虫鸣停住。"
+  },
+  {
+    "id": "gyarados",
+    "name": "暴鲤龙",
+    "latin": "Gyarados",
+    "type": "水 / 飞行",
+    "line": "瀑布深潭里的蓝鳞巨鱼，胡须一扫，整段河道都会起白沫。"
+  }
+]
