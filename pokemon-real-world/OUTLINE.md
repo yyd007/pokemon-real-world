@@ -2,11 +2,11 @@
 
 A short nature-documentary film and a page that plays it. Ten well-known Generation 1 Pokémon are treated as animals that could live in a real habitat. Each one gets a photoreal still, one original Chinese sentence, and a matching voiceover.
 
-The film is about 91 seconds, 1920×1080, H.264 video with AAC audio. Jigglypuff is typed as Normal, the Generation 1 typing, not Fairy.
+The shipped file is 90.7 seconds, 1920×1080, H.264 video with AAC audio. A rebuild must land between 70 and 100 seconds. Jigglypuff is typed as Normal, the Generation 1 typing, not Fairy.
 
 ## What plays
 
-1. Title card. 「如果初代宝可梦生活在真实世界」, with the subtitle 「十种最常见的宝可梦」.
+1. Title card. Kicker 「短纪录片」, headline 「如果初代宝可梦生活在真实世界」, subtitle 「十种最常见的宝可梦」. The voice speaks the headline and the subtitle.
 2. Ten creatures, in this order:
 
    | Order | Name | Type | Still |
@@ -22,18 +22,17 @@ The film is about 91 seconds, 1920×1080, H.264 video with AAC audio. Jigglypuff
    | 9 | 胖丁 Jigglypuff | 一般 | round pink animal in flowers |
    | 10 | 暴鲤龙 Gyarados | 水 / 飞行 | huge blue fish under a waterfall |
 
-3. End card. 「它们只是想象中的邻居。」
+3. End card. Kicker 「终」, headline 「它们只是想象中的邻居。」, subtitle 「画面是设想中的野外记录，不是真实物种。」. The voice speaks only the headline.
 
-The page puts the player on top and lists the same ten entries underneath. Names, types, and sentences all come from one file, `data/creatures.json`.
+The page puts the player on top and lists the same ten entries underneath. Each card shows the Chinese name, the Latin name, the type, and the sentence from `data/creatures.json`. The page title matches the film. The lede, roster note, and footer are written in `src/main.ts`. The build script refuses a list that is not exactly ten creatures. Title and end copy live in `scripts/build_video.py`, not in the JSON file.
 
 ## How a frame becomes the film
 
 ```text
-data/creatures.json          copy: name, type, one sentence
+data/creatures.json          roster copy: name, latin, type, one sentence
+public/creatures/<id>.jpg    one photoreal still per creature, 1280×720
         │
-public/creatures/<id>.jpg    one photoreal still per creature
-        │
-scripts/build_video.py
+scripts/build_video.py       title and end copy are constants in this file
         ├─ Pillow            title card, end card, transparent lower-thirds
         ├─ edge-tts          one Chinese voice clip per segment
         └─ ffmpeg            Ken Burns move, mix voice with a quiet bed, join segments
@@ -49,7 +48,7 @@ Segment timing follows the voice. Each creature stays on screen about 7.4–9.2 
 
 ```text
 pokemon-real-world/
-  data/creatures.json          the only copy source
+  data/creatures.json          roster copy: name, latin, type, line
   public/creatures/*.jpg       generated stills
   public/pokemon-real-world.mp4
   public/poster.jpg            title card, used as the video poster
@@ -70,12 +69,12 @@ pokemon-real-world/
 
 **Noto CJK.** Chinese is set with Noto Serif CJK SC for titles and names, and Noto Sans CJK SC for body text. The script loads face index 2 from the TTC and checks that the face name contains `SC`.
 
-**edge-tts.** Narration uses the voice `zh-CN-YunyangNeural` at a slightly slower rate (`-4%`). Each clip speaks the same sentence that is on screen: the name, then the line. Title and ending are separate clips.
+**edge-tts.** Narration uses the voice `zh-CN-YunyangNeural` at a slightly slower rate (`-4%`). A creature clip speaks the name, then the on-screen sentence. The title clip speaks the headline and the subtitle. The ending clip speaks only 「它们只是想象中的邻居。」
 
 **ffmpeg.** One encode per segment, then a concat copy.
 
-- Scale and crop the still to 2304×1296, then `zoompan` down to 1920×1080 at 30 fps.
-- Overlay the Pillow PNG.
+- Scale and crop each creature still to 2304×1296, then `zoompan` down to 1920×1080 at 30 fps. Title and end cards are already 1920×1080 and only fade.
+- On a creature segment, overlay the Pillow PNG. Title and end cards have no lower third.
 - Delay speech by 0.42 seconds, pad it to the segment length, and mix it with quiet brown noise low-passed at 220 Hz.
 - Limit the mix so the voice does not clip.
 - Encode H.264 at CRF 19 and AAC at 48 kHz, 160 kbps, stereo.
